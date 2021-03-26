@@ -1,17 +1,16 @@
 const router = require("express").Router();
-const cat = require("./model");
+const user = require("../models/userModel");
 
 router
   .route("/")
   .post(async (req, res) => {
     try {
-      console.log(req.body.name);
-      const post = await cat.create({
+      const post = await user.create({
         name: req.body.name,
-        age: req.body.age,
-        genre: req.body.genre,
+        email: req.body.email,
+        password: req.body.password,
       });
-      res.send(`cat post ${post.name} created with id: ${post._id}`);
+      res.send(`useer post ${post.name} created with id: ${post._id}`);
     } catch (e) {
       res.send(`failed to create cat ${e.message}`);
     }

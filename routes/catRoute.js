@@ -1,22 +1,22 @@
 const router = require("express").Router();
-const cat = require("./model");
+const cat = require("../models/catModel");
 
 router
   .route("/")
   .post(async (req, res) => {
     try {
-      console.log(req.body.name);
       const post = await cat.create({
         name: req.body.name,
         age: req.body.age,
         genre: req.body.genre,
       });
-      res.send(`cat post ${post.name} created with id: ${post._id}`);
+      res.send(`cat post ${post.name} created with id: ${post._id}, ${post}`);
     } catch (e) {
       res.send(`failed to create cat ${e.message}`);
     }
   })
   .get(async (req, res) => {
+    console.log("jihaa");
     res.send(await cat.find().where("age").gt(0));
   });
 
